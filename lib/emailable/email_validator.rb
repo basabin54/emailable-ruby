@@ -51,7 +51,7 @@ class EmailValidator < ActiveModel::EachValidator
     error ||= :disposable if ev.disposable? && !disposable
     error ||= :accept_all if ev.accept_all? && !accept_all
 
-    record.errors.add(attribute, error) if error
+    record.errors.add(attribute, error, value: value) if error
   rescue Emailable::Error
     # silence errors
   end
